@@ -8,10 +8,12 @@ char const RIGHT_DOWN = '*';
 char const HORIZONT   = '-';
 char const VERTICAL   = '|';
 
-char const EMPTY = '.';
+char const EMPTY = ' ';
 
 int const MIN_SIZE = 3;
 int const MAX_SIZE = 15;
+
+bool scale = true;
 
 int main()
 {
@@ -32,6 +34,10 @@ int main()
     {
         for (int col = 0; col < house_size; ++col)
         {
+            if (scale && col)
+            {
+                cout << EMPTY;
+            }
             if ((row == 0 && col == 0))
             {
                 cout << LEFT_UP;
@@ -71,6 +77,22 @@ int main()
             else if ( (row == DOWN_WINDOW && col  == RIGHT_WINDOW) )
             {
                 cout << RIGHT_DOWN;
+            }
+            else if ( ((row > UP_WINDOW && row < DOWN_WINDOW) && col  == LEFT_WINDOW) )
+            {
+                cout << VERTICAL;
+            }
+            else if ( ((row > UP_WINDOW && row < DOWN_WINDOW) && col  == RIGHT_WINDOW) )
+            {
+                cout << VERTICAL;
+            }
+            else if ( ((row == UP_WINDOW) && (col > LEFT_WINDOW && col < RIGHT_WINDOW)) )
+            {
+                cout << HORIZONT;
+            }
+            else if ( ((row == DOWN_WINDOW) && (col > LEFT_WINDOW && col < RIGHT_WINDOW)) )
+            {
+                cout << HORIZONT;
             }
             else
             {
