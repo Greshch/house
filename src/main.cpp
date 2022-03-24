@@ -8,7 +8,11 @@ char const RIGHT_DOWN = '*';
 char const HORIZONT   = '-';
 char const VERTICAL   = '|';
 
-char const EMPTY = ' ';
+char const EMPTY =      ' ';
+
+char const ROOF_TOP   = '^';
+char const ROOF_LEFT  = '/';
+char const ROOF_RIGHT = '\\';
 
 int const MIN_SIZE = 5;
 int const MAX_SIZE = 20;
@@ -32,6 +36,28 @@ int main()
 
     int const UP_WINDOW =  vertical_size / 6 == 0 ? 1 : vertical_size / 6;
     int const DOWN_WINDOW = UP_WINDOW + vertical_size / 2 - vertical_size / 6;
+
+    int const roof_vertical = house_size;
+    int const roof_horizont = house_size * scale;
+    for (int row = 0; row < roof_vertical; ++row)
+    {
+        for (int col = 0; col < roof_horizont; ++col)
+        {
+            if (col == roof_horizont / 2 - row)
+            {
+                cout << ROOF_LEFT;
+            }
+            else if (col == roof_horizont / 2 + row - 1)
+            {
+                cout << ROOF_RIGHT;
+            }
+            else
+            {
+                cout << EMPTY;
+            }
+        }
+        cout << endl;
+    }
 
     for (int row = 0; row < vertical_size; ++row)
     {
