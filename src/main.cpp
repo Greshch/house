@@ -10,55 +10,54 @@ char const VERTICAL   = '|';
 
 char const EMPTY = ' ';
 
-int const MIN_SIZE = 3;
-int const MAX_SIZE = 15;
+int const MIN_SIZE = 5;
+int const MAX_SIZE = 20;
 
-bool scale = true;
+int const scale = 2;
 
 int main()
 {
     int house_size {};
+
     do
     {
         cout << "Input size of house: ";
         cin >> house_size;
     } while (house_size < MIN_SIZE || house_size > MAX_SIZE);
+    int horizont_size = house_size * scale;
+    int vertical_size = house_size;
 
-    int const LEFT_WINDOW =  house_size / 4;
-    int const RIGHT_WINDOW = house_size / 2;
+    int const LEFT_WINDOW =  horizont_size / 6 == 0 ? 1 : horizont_size / 6;
+    int const RIGHT_WINDOW = LEFT_WINDOW + horizont_size / 2 - horizont_size / 6;
 
-    int const UP_WINDOW =  house_size / 5;
-    int const DOWN_WINDOW = house_size / 2 + house_size / 6;
+    int const UP_WINDOW =  vertical_size / 6 == 0 ? 1 : vertical_size / 6;
+    int const DOWN_WINDOW = UP_WINDOW + vertical_size / 2 - vertical_size / 6;
 
-    for (int row = 0; row < house_size; ++row)
+    for (int row = 0; row < vertical_size; ++row)
     {
-        for (int col = 0; col < house_size; ++col)
+        for (int col = 0; col < horizont_size; ++col)
         {
-            if (scale && col)
-            {
-                cout << EMPTY;
-            }
             if ((row == 0 && col == 0))
             {
                 cout << LEFT_UP;
             }
-            else if ((row == 0 && col == house_size - 1))
+            else if ((row == 0 && col == horizont_size - 1))
             {
                 cout << RIGHT_UP;
             }
-            else if ((row == house_size - 1 && col == 0))
+            else if ((row == vertical_size - 1 && col == 0))
             {
                 cout << LEFT_DOWN;
             }
-            else if ((row == house_size - 1 && col == house_size - 1))
+            else if ((row == vertical_size - 1 && col == horizont_size - 1))
             {
                 cout << RIGHT_DOWN;
             }
-            else if ((row > 0 && row < house_size - 1 && (col == 0 || col == house_size - 1)))
+            else if ((row > 0 && row < vertical_size - 1 && (col == 0 || col == horizont_size - 1)))
             {
                 cout << VERTICAL;
             }
-            else if (((row == 0 || row == house_size - 1 ) && col > 0 && col < house_size - 1))
+            else if (((row == 0 || row == vertical_size - 1 ) && col > 0 && col < horizont_size - 1))
             {
                 cout << HORIZONT;
             }
